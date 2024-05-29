@@ -9,7 +9,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o /mazmorras_y_losetas ./cmd/main.go
+RUN go build -o /mazmorras_y_losetas ./src/main.go
 
 EXPOSE 8080
 
