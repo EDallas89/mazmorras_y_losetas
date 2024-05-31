@@ -28,5 +28,14 @@ func main() {
 		})
 	})
 
+	schema, err := os.ReadFile("db/schema.sql")
+	if err != nil {
+		log.Fatalf("Error al leer el archivo schema.sql: %v", err)
+	}
+	_, err = db.Exec(string(schema))
+	if err != nil {
+		log.Fatalf("Error al ejecutar el script SQL: %v", err)
+	}
+
 	r.Run(":8080")
 }
