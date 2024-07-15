@@ -4,4 +4,4 @@
 
 ## Verificación
 - http://localhost:3000 para ver el frontend de React.
-- http://localhost:8080/ping para ver la respuesta del backend de Golang.
+- http://localhost:8080/db para ver la respuesta del backend de Golang al conectar con PSQL.
