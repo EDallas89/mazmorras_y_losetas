@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"mazmorras_y_losetas/src/models"
 	"net/http"
 	"os"
 
@@ -39,6 +40,11 @@ func main() {
 		log.Fatalf("Error al migrar el esquema de la base de datos: %v", err)
 	}
 
+	err = db.AutoMigrate(&models.User{})
+	if err != nil {
+		log.Fatalf("Error al migrar el esquema de la base de datos: %v", err)
+	}
+
 	// Leer y ejecutar el script SQL del archivo schema.sql
 	schema, err := os.ReadFile("db/schema.sql")
 	if err != nil {
@@ -56,6 +62,9 @@ func main() {
 		}
 		ctx.JSON(http.StatusOK, boardgames)
 	})
+
+	// Registrar las rutas de usuario
+	models.RegisterUserRoutes(router, db)
 
 	// Iniciar el servidor
 	router.Run(":8080")
